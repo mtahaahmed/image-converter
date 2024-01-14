@@ -5,7 +5,7 @@ variable "project_id" {
 
 variable "region" {
   type = string
-  default = "europe-west3"
+  default = "europe-west4"
 }
 
 variable "cluster_name" {
