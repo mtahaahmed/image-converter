@@ -4,6 +4,8 @@ metadata:
   name: {{ include "image-converter.fullname" . }}
   labels:
     {{- include "image-converter.labels" . | nindent 4 }}
+  annotations:
+    cloud.google.com/neg: '{"exposed_ports": {"80":{}}}' # using GKE NEG
 spec:
   type: {{ .Values.service.type }}
   ports:
