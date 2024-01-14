@@ -1,5 +1,5 @@
 resource "google_service_account" "example" {
-  account_id   = "example-service-account"
+  account_id   = var.project_id
   display_name = "Example Service Account"
 }
 
@@ -9,7 +9,7 @@ resource "google_service_account_key" "example_key" {
 
 # Grant Cloud Pub/Sub permissions
 resource "google_project_iam_binding" "pubsub_binding" {
-  project = "your-gcp-project-id"
+  project = var.project_id
   role    = "roles/pubsub.editor"
   members = [
     "serviceAccount:${google_service_account.example.email}",
@@ -18,7 +18,7 @@ resource "google_project_iam_binding" "pubsub_binding" {
 
 # Grant Cloud SQL permissions
 resource "google_project_iam_binding" "sql_binding" {
-  project = "your-gcp-project-id"
+  project = var.project_id
   role    = "roles/cloudsql.client"
   members = [
     "serviceAccount:${google_service_account.example.email}",
@@ -27,7 +27,7 @@ resource "google_project_iam_binding" "sql_binding" {
 
 # Grant Cloud Storage permissions
 resource "google_project_iam_binding" "storage_binding" {
-  project = "your-gcp-project-id"
+  project = var.project_id
   role    = "roles/storage.objectAdmin"
   members = [
     "serviceAccount:${google_service_account.example.email}",
@@ -36,7 +36,7 @@ resource "google_project_iam_binding" "storage_binding" {
 
 # Grant EventArc permissions
 resource "google_project_iam_binding" "eventarc_binding" {
-  project = "your-gcp-project-id"
+  project = var.project_id
   role    = "roles/eventarc.admin"
   members = [
     "serviceAccount:${google_service_account.example.email}",
