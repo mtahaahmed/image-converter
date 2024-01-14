@@ -53,10 +53,10 @@ spec:
       volumes:
       - name: service-account-cred
         secret:
-          secretName: service-account-credentials
+          secretName: service-account-cred
       - name: app-env
         configMap:
-          name: myConfigMap
+          name: my-config-map
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
