@@ -1,9 +1,3 @@
-# base service account name for improved security posture
-data "google_service_account" "gke_base_sa" {
-  account_id = local.node_config_sa_name
-  project    = var.project_id
-}
-
 resource "google_compute_network" "vpc_network" {
   name = "vpc-network"
 }
@@ -12,11 +6,12 @@ resource "google_compute_network" "vpc_network" {
 resource "google_container_cluster" "gke" {
   name                     = var.cluster_name
   project                  = var.project_id
-  location                 = var.region
+  location                 = "${var.region}-a"
   remove_default_node_pool = true
   initial_node_count       = 1
   min_master_version       = local.version
   networking_mode          = "VPC_NATIVE"
+  deletion_protection      = false
 
   private_cluster_config {
     enable_private_endpoint = false
@@ -30,7 +25,7 @@ resource "google_container_node_pool" "additional" {
   name     = "${var.cluster_name}-node-pool"
   location = var.region
   project  = var.project_id
-  cluster  = google_container_cluster.gke.name
+  cluster  = google_container_cluster.gke.id
 
   node_count = 2
   version    = local.version
