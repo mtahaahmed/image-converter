@@ -95,6 +95,11 @@ def get_processed_images():
 
     return jsonify({'processed': processed_data}), 200
 
+@app.route('/', methods=['GET'])
+def health():
+    print("health endpoint")
+    return '', 200
+
 def convert_and_store_image(input_url, name):
     # Download the image to memory
     image_content = storage_client.bucket(os.environ['CLOUD_STORAGE_BUCKET']).blob(input_url).download_as_bytes()
