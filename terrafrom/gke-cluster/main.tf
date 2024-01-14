@@ -32,7 +32,7 @@ resource "google_container_node_pool" "additional" {
 
   node_config {
     preemptible  = true
-    machine_type = "t2a-standard-1"
+    machine_type = "e2-medium"
     image_type   = "COS_CONTAINERD"
     oauth_scopes = local.node_pools_oauth_scopes
   }
