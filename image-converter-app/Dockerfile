@@ -3,7 +3,7 @@
 
 ## For Pushing docker image
 ### docker push tahakarachi/image-converter --all-tags
-ARG ARCH=amd64
+
 FROM python:3.10
 
 WORKDIR /app
