@@ -77,10 +77,10 @@ autoscaling:
 
 configmap:
   GOOGLE_APPLICATION_CREDENTIALS: /mnt/key.json
-  GOOGLE_CLOUD_PROJECT: your-gcp-project-id
-  CLOUD_STORAGE_BUCKET: your-cloud-storage-bucket
-  CLOUD_SQL_INSTANCE: your-cloud-sql-instance-connection-name
-  PUBSUB_TOPIC: your-pubsub-topic
+  GOOGLE_CLOUD_PROJECT: devops-challenge-411209
+  CLOUD_STORAGE_BUCKET: devops-challenge-tf
+  CLOUD_SQL_INSTANCE: main-instance
+  PUBSUB_TOPIC: example-topic
 
 nodeSelector: {}
 

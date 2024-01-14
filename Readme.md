@@ -10,7 +10,7 @@ Here is a basic outline of the application:
 - There is a worker subscribed to this topic that takes the URL in the message, downloads it to memory, converts the image to WebP and stores it in Cloud Storage.
 - After the image is stored, EventArc is used to trigger another action in a worker that updates the database with the resulting URL.
 
-## This repo contains:
+## This repo contains
 
 1. Image converter python app
 2. Dockerfile
