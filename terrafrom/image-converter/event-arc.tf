@@ -1,8 +1,3 @@
-resource "google_eventarc_channel" "primary" {
-  location = var.region
-  name     = "channel"
-}
-
 resource "google_eventarc_trigger" "primary" {
     name = "name"
     location = var.region
