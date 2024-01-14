@@ -55,6 +55,46 @@ def process_image():
     processed_url = convert_and_store_image(url, name)
     return jsonify({'message': 'Image processing job initiated', 'processed_url': processed_url}), 200
 
+@app.route('/pending', methods=['GET'])
+def get_pending_images():
+    # Fetch pending images from GCP Cloud SQL
+    connection_name = os.environ["CLOUD_SQL_INSTANCE"]
+    db_user = os.environ["DB_USER"]
+    db_password = os.environ["DB_PASSWORD"]
+    db_name = os.environ["DB_NAME"]
+    db = mysql.connector.connect(
+        host=connection_name,
+        user=db_user,
+        password=db_password,
+        database=db_name
+    )
+    cursor = db.cursor()
+    cursor.execute("SELECT name, url FROM pending_jobs")
+    pending_data = [{'name': name, 'url': url} for name, url in cursor.fetchall()]
+    db.close()
+
+    return jsonify({'pending': pending_data}), 200
+
+@app.route('/processed', methods=['GET'])
+def get_processed_images():
+    # Fetch processed images from GCP Cloud SQL
+    connection_name = os.environ["CLOUD_SQL_INSTANCE"]
+    db_user = os.environ["DB_USER"]
+    db_password = os.environ["DB_PASSWORD"]
+    db_name = os.environ["DB_NAME"]
+    db = mysql.connector.connect(
+        host=connection_name,
+        user=db_user,
+        password=db_password,
+        database=db_name
+    )
+    cursor = db.cursor()
+    cursor.execute("SELECT name, url FROM processed_jobs")
+    processed_data = [{'name': name, 'url': url} for name, url in cursor.fetchall()]
+    db.close()
+
+    return jsonify({'processed': processed_data}), 200
+
 def convert_and_store_image(input_url, name):
     # Download the image to memory
     image_content = storage_client.bucket(os.environ['CLOUD_STORAGE_BUCKET']).blob(input_url).download_as_bytes()
