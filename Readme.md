@@ -4,7 +4,13 @@ This code has not been run on GCP yet.
 
 ## Image converter App
 
-This repo contains:
+Here is a basic outline of the application:
+
+- The API takes a URL and a name. It stores the job as pending in the database and raises a Cloud Pub/Sub event
+- There is a worker subscribed to this topic that takes the URL in the message, downloads it to memory, converts the image to WebP and stores it in Cloud Storage.
+- After the image is stored, EventArc is used to trigger another action in a worker that updates the database with the resulting URL.
+
+## This repo contains:
 
 1. Image converter python app
 2. Dockerfile
