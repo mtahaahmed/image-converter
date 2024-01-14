@@ -5,6 +5,11 @@ terraform {
       version = "5.11.0"
     }
   }
+  backend "gcs" {
+    bucket  = "devops-challenge-tf"
+    prefix  = "terraform/gke-cluster"
+  }
+  required_version = "v1.5.4"
 }
 
 provider "google" {

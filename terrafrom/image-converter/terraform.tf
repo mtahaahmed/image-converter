@@ -13,6 +13,11 @@ terraform {
       version = ">= 2.11.0, < 3.0.0"
     }
   }
+  backend "gcs" {
+    bucket  = "devops-challenge-tf"
+    prefix  = "terraform/image-conveter"
+  }
+  required_version = "v1.5.4"
 }
 
 provider "google" {
