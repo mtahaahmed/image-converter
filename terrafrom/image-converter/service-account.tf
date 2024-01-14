@@ -5,7 +5,6 @@ resource "google_service_account" "example" {
 
 resource "google_service_account_key" "example_key" {
   service_account_id = google_service_account.example.name
-  private_key_type   = "json"
 }
 
 # Grant Cloud Pub/Sub permissions

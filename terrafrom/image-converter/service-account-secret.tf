@@ -4,6 +4,6 @@ resource "kubernetes_secret" "example_secret" {
   }
 
   data = {
-    "key.json" = google_service_account_key.example_key.private_key_json
+    "key.json" = base64decode(google_service_account_key.example_key.private_key)
   }
 }
